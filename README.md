@@ -46,7 +46,7 @@ $ cp ../repos/DruM/DruM_2D/config/sbm.yaml config
 $ mkdir data
 ```
 
-Download the pickle files from Google drive and move them to `data` directory
+Download the pickle files from Google drive and move them to `data` directory, as in [`DruM`](https://github.com/harryjo97/DruM/tree/master/DruM_2D): 
 - Planar dataset(`planar_64_200.pt`): [https://drive.google.com/drive/folders/13esonTpioCzUAYBmPyeLSjXlDoemXXQB?usp=sharing](https://drive.google.com/drive/folders/13esonTpioCzUAYBmPyeLSjXlDoemXXQB?usp=sharing)
 - SBM dataset(`sbm_200pt`): [https://drive.google.com/drive/folders/1imzwi4a0cpVvE_Vyiwl7JCtkr13hv9Da?usp=sharing](https://drive.google.com/drive/folders/1imzwi4a0cpVvE_Vyiwl7JCtkr13hv9Da?usp=sharing)
 
