@@ -47,8 +47,8 @@ $ mkdir data
 ```
 
 Download the pickle files from Google drive and move them to `data` directory
-- [Planar dataset(`planar_64_200.pt`): ](https://drive.google.com/drive/folders/13esonTpioCzUAYBmPyeLSjXlDoemXXQB?usp=sharing)
-- [SBM dataset(`sbm_200pt`): ](https://drive.google.com/drive/folders/1imzwi4a0cpVvE_Vyiwl7JCtkr13hv9Da?usp=sharing)
+- Planar dataset(`planar_64_200.pt`): [https://drive.google.com/drive/folders/13esonTpioCzUAYBmPyeLSjXlDoemXXQB?usp=sharing](https://drive.google.com/drive/folders/13esonTpioCzUAYBmPyeLSjXlDoemXXQB?usp=sharing)
+- SBM dataset(`sbm_200pt`): [https://drive.google.com/drive/folders/1imzwi4a0cpVvE_Vyiwl7JCtkr13hv9Da?usp=sharing](https://drive.google.com/drive/folders/1imzwi4a0cpVvE_Vyiwl7JCtkr13hv9Da?usp=sharing)
 
 Then, in the directory `synthetic`, Run the following scripts: 
 ```bash
