@@ -52,6 +52,9 @@ from gmm import GMMModelSelection
 from gmm_based_diffmodel import my_start_training
 from novelty_generation import MirrorDescentExponentialGradientOptimizer, NewClusterAllocatorMean, NewClusterAllocatorCovariance, VonNeumannOptimizer, kl_divergence_gmm, determine_new_cluster_by_novlety_condition, determine_weights_by_reliablity_condition
 
+sys.path.append('../config')
+from config_real import CoraRunConfig
+
 outdir = './output/planar'
 if not os.path.exists(outdir):
     os.makedirs(outdir)
