@@ -210,18 +210,20 @@ def main(out_channels, M):
         # 3) Generate New Data Samples in Latent Space
         z_new = torch.distributions.MultivariateNormal(
             torch.Tensor(alloc_mean.mu_.detach().numpy()), 
-            torch.Tensor(alloc_cov.covariances_.detach().numpy())).sample([N_added]).to(device)
+            torch.Tensor(alloc_cov.covariances_.detach().numpy())).sample([M]).to(device)
 
         z_sample_new = np.vstack([z_train[i_sample, :, :].cpu().detach().numpy(), z_new.cpu().detach().numpy()])
 
+        z_sample_new_reversed = model_gmmdiff.predict(z_sample_new)
+        
         edge_tuple_orig = train_adjs_tensor[i_sample].cpu().numpy().nonzero()
         edge_list_orig = np.hstack((edge_tuple_orig[0].reshape(-1, 1), edge_tuple_orig[1].reshape(-1, 1)))
         G_orig = nx.Graph(directed=True)
         G_orig.add_nodes_from(np.arange(64))
         G_orig.add_edges_from(edge_list_orig)
 
-        norm = torch.linalg.norm(torch.tensor(z_sample_planar), axis=1)
-        probs_edge_new = 1.0/(1.0 + torch.exp(-(z_sample_planar @ z_example_planar.T) / (norm.reshape(-1, 1) * norm.reshape(1, -1))))
+        norm = torch.linalg.norm(torch.tensor(z_sample_new_reversed), axis=1)
+        probs_edge_new = 1.0/(1.0 + torch.exp(-(z_sample_new_reversed @ z_sample_new_reversed.T) / (norm.reshape(-1, 1) * norm.reshape(1, -1))))
 
         estimated_edge_new = (probs_edge_new >= 0.7).nonzero()
 
