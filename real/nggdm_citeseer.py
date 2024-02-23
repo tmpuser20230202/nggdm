@@ -52,6 +52,9 @@ from gmm import GMMModelSelection
 from gmm_based_diffmodel import my_start_training
 from novelty_generation import MirrorDescentExponentialGradientOptimizer, NewClusterAllocatorMean, NewClusterAllocatorCovariance, VonNeumannOptimizer, kl_divergence_gmm, determine_new_cluster_by_novlety_condition, determine_weights_by_reliablity_condition
 
+sys.path.append('../config')
+from config_real import CiteSeerRunConfig
+
 outdir = './output/citeseer'
 if not os.path.exists(outdir):
     os.makedirs(outdir)
@@ -111,7 +114,7 @@ def main(out_channels, M):
     n_cluster = len(gmm_model_selection.model_best_.means_)
 
     # 3) GMM-based Diffusion Model
-    runconfig = CoraRunConfig(dataset=name, S=16, K=n_cluster)
+    runconfig = CiteSeerRunConfig(dataset=name, S=16, K=n_cluster)
 
     z_train_2d = z_train.reshape(z_train.shape[0] * z_train.shape[1], z_train.shape[2])
     z_val_2d = z_val.reshape(z_val.shape[0] * z_val.shape[1], z_val.shape[2])
