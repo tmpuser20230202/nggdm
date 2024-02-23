@@ -52,6 +52,9 @@ from gmm import GMMModelSelection
 from gmm_based_diffmodel import my_start_training
 from novelty_generation import MirrorDescentExponentialGradientOptimizer, NewClusterAllocatorMean, NewClusterAllocatorCovariance, VonNeumannOptimizer, kl_divergence_gmm, determine_new_cluster_by_novlety_condition, determine_weights_by_reliablity_condition
 
+sys.path.append('../config')
+from config_synthetic import PlanarRunConfig
+
 outdir = './output/planar'
 if not os.path.exists(outdir):
     os.makedirs(outdir)
@@ -200,7 +203,7 @@ def main(out_channels, M):
                            return_result=True)
 
     # Step2. Novelty Generation Step
-    for i_sample, gmm in enumerate(gmm_model_selection_train_list):
+    for i_sample, gmm in enumerate(gmm_model_selection_test_list):
         # 1) Novelty Condition
         alloc_mean, alloc_cov = determine_new_cluster_by_novlety_condition(gmm)
 
@@ -212,11 +215,11 @@ def main(out_channels, M):
             torch.Tensor(alloc_mean.mu_.detach().numpy()), 
             torch.Tensor(alloc_cov.covariances_.detach().numpy())).sample([M]).to(device)
 
-        z_sample_new = np.vstack([z_train[i_sample, :, :].cpu().detach().numpy(), z_new.cpu().detach().numpy()])
+        z_sample_new = np.vstack([z_test[i_sample, :, :].cpu().detach().numpy(), z_new.cpu().detach().numpy()])
 
         z_sample_new_reversed = model_gmmdiff.predict(z_sample_new)
         
-        edge_tuple_orig = train_adjs_tensor[i_sample].cpu().numpy().nonzero()
+        edge_tuple_orig = test_adjs_tensor[i_sample].cpu().numpy().nonzero()
         edge_list_orig = np.hstack((edge_tuple_orig[0].reshape(-1, 1), edge_tuple_orig[1].reshape(-1, 1)))
         G_orig = nx.Graph(directed=True)
         G_orig.add_nodes_from(np.arange(64))
@@ -231,7 +234,7 @@ def main(out_channels, M):
         estimated_edge_new = estimated_edge_new[ok, :]
 
         G_new = nx.Graph(directed=True)
-        G_new.add_nodes_from(np.arange(len(G_orig.nodes)+N_added))
+        G_new.add_nodes_from(np.arange(len(G_orig.nodes) + M))
         G_new.add_edges_from(np.vstack((np.array(list(G_orig.edges)), estimated_edge_new)))
 
 if __name__ == 'main':
