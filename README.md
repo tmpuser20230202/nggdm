@@ -6,6 +6,10 @@ To build the environment, run the following script:
 ```bash
 $ conda create -f=nggdm.yaml
 ```
+Then, activate `graphgen_diffmodel`. 
+```bash
+$ conda activate graphgen_diffmodel 
+```
 
 The following libraries are installed. 
 - Python 3.10.3
