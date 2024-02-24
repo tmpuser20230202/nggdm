@@ -26,21 +26,21 @@ import math
 
 import networkx as nx
 
-sys.path.append('repos/gmcd')
-sys.path.append('repos/gmcd/src')
-sys.path.append('repos/gmcd/src/datasets')
-sys.path.append('repos/gmcd/src/experiment')
-sys.path.append('repos/gmcd/src/optimizer')
-sys.path.append('repos/gmcd/src/mutils')
+sys.path.append('../repos/gmcd')
+sys.path.append('../repos/gmcd/src')
+sys.path.append('../repos/gmcd/src/datasets')
+sys.path.append('../repos/gmcd/src/experiment')
+sys.path.append('../repos/gmcd/src/optimizer')
+sys.path.append('../repos/gmcd/src/mutils')
 
 sys.path.append('../repos/gmcd/src/model')
 from artransformer_diff import ArTransformerDiffusion  # src/model
 from gaussian_diff import GaussianDiffusion # src/model
 from linear_transformer import DenoisingTransformer # src/model
 
-sys.path.append('repos/DruM/DruM_2D')
-sys.path.append('repos/DruM/DruM_2D/parsers')
-sys.path.append('repos/DruM/DruM_2D/utils')
+sys.path.append('../repos/DruM/DruM_2D')
+sys.path.append('../repos/DruM/DruM_2D/parsers')
+sys.path.append('../repos/DruM/DruM_2D/utils')
 from config import get_config, print_cfg
 from data_loader import dataloader, graphs_to_dataloader, graphs_to_tensor, init_features
 from loader import load_data, load_batch
